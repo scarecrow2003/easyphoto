@@ -1,0 +1,5 @@
+.idea
+frontend/public/static/dev/
+frontend/public/static/dev/bundle.js
+frontend/public/static/dev/bundle.js.map
+frontend/public/static/dev/bundle.css
