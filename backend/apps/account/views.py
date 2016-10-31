@@ -1,5 +1,5 @@
 from django.contrib.auth.models import User
-from django.http import JsonResponse
+from django.http import JsonResponse, HttpResponseRedirect
 from django.contrib.auth import login as lg, authenticate
 from django.views.decorators.csrf import csrf_exempt
 from rest_framework_jwt.settings import api_settings
