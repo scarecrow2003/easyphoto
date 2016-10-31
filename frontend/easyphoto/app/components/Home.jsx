@@ -2,6 +2,11 @@ import React from 'react';
 import TopMenu from './TopMenu';
 
 export default class Home extends React.Component {
+
+    componentWillMount() {
+
+    }
+
     render() {
         return (
             <div className="col-xs-12 home">
