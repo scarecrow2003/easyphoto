@@ -4,6 +4,7 @@ from django.contrib.auth import login as lg, authenticate
 from django.views.decorators.csrf import csrf_exempt
 from rest_framework_jwt.settings import api_settings
 import json
+from .models import EPAccount
 
 @csrf_exempt
 def signup(request):
@@ -20,6 +21,7 @@ def signup(request):
         user.is_active = True
         user.save()
         user.backend = 'django.contrib.auth.backends.ModelBackend'
+        account = EPAccount.objects.create(user=user, nick_name=nick_name)
         lg(request, user)
         return JsonResponse({'token': generate_token(user)})
 

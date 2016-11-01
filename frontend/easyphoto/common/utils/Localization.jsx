@@ -5,12 +5,14 @@ export default {
         en: {
             email: "Email",
             password: "Password",
-            login: "LOGIN"
+            login: "LOGIN",
+            notlogin: "Dear Guest, please"
         },
         cn: {
             email: "Email",
             password: "MiMa",
-            login: "Denglu"
+            login: "Denglu",
+            notlogin: "Dear Guest, please"
         }
     })
 }
