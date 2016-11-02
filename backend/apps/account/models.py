@@ -44,6 +44,7 @@ class EPAccountCompany(models.Model):
     account_id = models.ForeignKey(EPAccount)
     company_id = models.ForeignKey(EPCompany)
     position_id = models.ForeignKey(EPPosition)
+    defunct = models.BooleanField(default=False)
 
     class Meta:
         app_label = 'account'
