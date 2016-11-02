@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User, Group
+from apps.common.models import BaseModel
 
 
 class EPAccount(models.Model):
@@ -27,7 +28,7 @@ class EPCompany(models.Model):
         return self.company_name
 
 
-class EPPosition(models.Model):
+class EPPosition(BaseModel):
     company_id = models.ForeignKey(EPCompany)
     name = models.CharField(max_length=30)
     description = models.CharField(max_length=100)
@@ -40,11 +41,11 @@ class EPPosition(models.Model):
         return self.title
 
 
-class EPAccountCompany(models.Model):
+class EPAccountCompany(BaseModel):
     account_id = models.ForeignKey(EPAccount)
     company_id = models.ForeignKey(EPCompany)
     position_id = models.ForeignKey(EPPosition)
-    defunct = models.BooleanField(default=False)
+    dividend = models.DecimalField(max_digits=4, decimal_places=2, default=2)
 
     class Meta:
         app_label = 'account'

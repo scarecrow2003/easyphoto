@@ -42,8 +42,10 @@ THIRD_PARTY_APPS = [
 ]
 
 PROJECT_APPS = [
+    'apps.common',
     'apps.account',
     'apps.job',
+    'apps.workflow',
     'apps.lookup'
 ]
 
