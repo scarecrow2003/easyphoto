@@ -9,7 +9,7 @@ class EPAccount(models.Model):
 
     class Meta:
         app_label = 'account'
-        db_table = 'account'
+        db_table = 'ep_account'
 
     def __str__(self):
         return self.nick_name
@@ -21,7 +21,7 @@ class EPCompany(models.Model):
 
     class Meta:
         app_label = 'account'
-        db_table = 'company'
+        db_table = 'ep_company'
 
     def __str__(self):
         return self.company_name
