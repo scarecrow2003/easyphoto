@@ -18,6 +18,7 @@ class EPJob(BaseModel):
 
 class EPTask(BaseModel):
     task_name = models.CharField(max_length=30)
+    description = models.CharField(max_length=100, blank=True)
     workflow_id = models.ForeignKey(EPWorkflow)
 
     class Meta:

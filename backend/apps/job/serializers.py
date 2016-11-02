@@ -1,8 +1,8 @@
 from rest_framework import serializers
-from .models import Job
+from .models import EPJob
 
 
 class JobSerializer(serializers.ModelSerializer):
     class Meta:
-        model = Job
+        model = EPJob
         fields = ('customer_name', 'customer_id')

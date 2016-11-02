@@ -31,12 +31,15 @@ class Command(BaseCommand):
     def handle(self, *args, **options):
         if Group.objects.all().count() == 0 and EPCompany.objects.all().count() == 0:
             group = Group.objects.create(name='easyphoto')
-            company = EPCompany.objects.create(group=group, company_name='easyphoto')
+            EPCompany.objects.create(group=group, company_name='easyphoto')
         if EPPosition.objects.all().count() == 0:
+            company = EPCompany.objects.get(pk=1)
             for name, description in Command.POSITIONS:
                 EPPosition.objects.create(company_id=company, name=name, description=description)
         if EPWorkflow.objects.all().count() == 0:
-            EPWorkflow.objects.create(workflow_name='epworkflow', company_id=1)
+            company = EPCompany.objects.get(pk=1)
+            EPWorkflow.objects.create(workflow_name='epworkflow', company_id=company)
         if EPTask.objects.all().count() == 0:
+            workflow = EPWorkflow.objects.get(pk=1)
             for name, description in Command.TASKS:
-                EPTask.objects.create(workflow_name=name, description=description, company_id=1)
+                EPTask.objects.create(workflow_id=workflow, task_name=name, description=description)
