@@ -43,7 +43,8 @@ THIRD_PARTY_APPS = [
 
 PROJECT_APPS = [
     'apps.account',
-    'apps.job'
+    'apps.job',
+    'apps.lookup'
 ]
 
 INSTALLED_APPS = PREREQ_APPS + THIRD_PARTY_APPS + PROJECT_APPS
