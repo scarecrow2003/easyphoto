@@ -2,6 +2,7 @@
 node_modules
 *.pyc
 __pycache__/
+*~
 frontend/public/static/dev/
 frontend/public/static/dev/bundle.js
 frontend/public/static/dev/bundle.js.map
