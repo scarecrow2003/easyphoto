@@ -9,7 +9,7 @@ export default class Home extends React.Component {
     constructor() {
         super();
         this.state = {
-            user: null//{id: 123, name: 'abc', gid: 234}
+            user: {id: 1, name: 'abc', gid: 234}
         }
         this.login = this.login.bind(this);
     }

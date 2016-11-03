@@ -1,9 +1,9 @@
 from django.db import models
-from django.contrib.auth.models import User, Group
-from apps.common.models import BaseModel
+from ..common.models import BaseModel
 
 
 class EPAccount(models.Model):
+    from django.contrib.auth.models import User
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     nick_name = models.CharField(max_length=30)
     wechat_id = models.CharField(max_length=50, blank=True)
@@ -17,6 +17,7 @@ class EPAccount(models.Model):
 
 
 class EPCompany(models.Model):
+    from django.contrib.auth.models import Group
     group = models.OneToOneField(Group, on_delete=models.CASCADE)
     company_name = models.CharField(max_length=50)
 
@@ -38,7 +39,7 @@ class EPPosition(BaseModel):
         db_table = 'ep_position'
 
     def __str__(self):
-        return self.title
+        return self.name
 
 
 class EPAccountCompany(BaseModel):
@@ -46,6 +47,7 @@ class EPAccountCompany(BaseModel):
     company_id = models.ForeignKey(EPCompany)
     position_id = models.ForeignKey(EPPosition)
     dividend = models.DecimalField(max_digits=4, decimal_places=2, default=2)
+    max_discount = models.DecimalField(max_digits=4, decimal_places=2, default=20)
 
     class Meta:
         app_label = 'account'

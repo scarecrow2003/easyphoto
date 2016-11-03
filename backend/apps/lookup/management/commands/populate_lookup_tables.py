@@ -1,9 +1,8 @@
 from django.core.management.base import BaseCommand
 from django.db import transaction
 from django.contrib.auth.models import Group
-from apps.account.models import EPCompany, EPPosition
-from apps.workflow.models import EPWorkflow
-from apps.job.models import EPTask
+from ....account.models import EPCompany, EPPosition
+from ....workflow.models import EPWorkflow, EPStatus, EPTask
 
 
 class Command(BaseCommand):
@@ -27,6 +26,22 @@ class Command(BaseCommand):
         ('DONE', 'Photos collected by customer')
     ]
 
+    STATUS = [
+        (1, 'Registered', 'REGIS'),
+        (2, 'Makeup Started', 'MAKEUP'),
+        (3, 'Makeup done', 'MAKEUP'),
+        (4, 'Photo shoot started', 'SHOOT'),
+        (5, 'Photo shoot done', 'SHOOT'),
+        (6, 'Lightly touch up done', 'LIGHT'),
+        (7, 'Photo selection start', 'CHOOSE'),
+        (8, 'Photo selection done', 'CHOOSE'),
+        (9, 'Touch up start', 'TOUCHUP'),
+        (10, 'Touch up done', 'TOUCHUP'),
+        (11, 'Send to vendor to print', 'SEND'),
+        (12, 'Printed photo returned', 'RECEIVE'),
+        (13, 'Customer collected', 'DONE')
+    ]
+
     @transaction.atomic
     def handle(self, *args, **options):
         if Group.objects.all().count() == 0 and EPCompany.objects.all().count() == 0:
@@ -43,3 +58,8 @@ class Command(BaseCommand):
             workflow = EPWorkflow.objects.get(pk=1)
             for name, description in Command.TASKS:
                 EPTask.objects.create(workflow_id=workflow, task_name=name, description=description)
+        if EPStatus.objects.all().count() == 0:
+            workflow = EPWorkflow.objects.get(pk=1)
+            for sequence, name, task in Command.STATUS:
+                task_id = EPTask.objects.get(task_name=task)
+                EPStatus.objects.create(sequence=sequence, name=name, workflow_id=workflow, task_id=task_id)

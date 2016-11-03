@@ -8,5 +8,6 @@ from .serializers import JobSerializer
 class JobViewSet(viewsets.ModelViewSet):
     queryset = EPJob.objects.all()
 
-    def list(self, request):
-        return Response({'data': JobSerializer(Job.objects.all(), many=True).data})
+    def list(self, request, **kwargs):
+        user = request.user
+        return Response({'data': JobSerializer(EPJob.objects.all(), many=True).data})
