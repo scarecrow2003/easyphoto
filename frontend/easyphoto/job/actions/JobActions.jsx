@@ -7,7 +7,26 @@ export default {
         JobServices.getJobsList(function(response) {
             AppDispatcher.dispatch({
                 actionType: ACTION_LIST_JOBS,
+                jobs: response.jobs,
+                companies: response.companies
+            });
+        })
+    },
+
+    saveJob: (data) => {
+        JobServices.saveJob(data, function(response) {
+            AppDispatcher.dispatch({
+                actionType: ACTION_SAVE_JOB,
                 data: response.data
+            });
+        })
+    },
+
+    updateJob: (data) => {
+        JobServices.saveJob(data, function(response) {
+            AppDispatcher.dispatch({
+                actionType: ACTION_UPDATE_JOB,
+                data: data
             });
         })
     }

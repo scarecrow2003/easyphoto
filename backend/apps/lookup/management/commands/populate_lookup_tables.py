@@ -1,7 +1,7 @@
 from django.core.management.base import BaseCommand
 from django.db import transaction
-from django.contrib.auth.models import Group
-from ....account.models import EPCompany, EPPosition
+from django.contrib.auth.models import Group, User
+from ....account.models import EPCompany, EPPosition, EPAccountCompany, EPAccount
 from ....workflow.models import EPWorkflow, EPStatus, EPTask
 
 
@@ -11,7 +11,8 @@ class Command(BaseCommand):
         ('PHOTO', 'Photographer'),
         ('MKUP', 'Makeup artist'),
         ('DESIGN', 'Graphic Designer'),
-        ('HELPER', 'Photographer help')
+        ('HELPER', 'Photographer help'),
+        ('GENERAL', 'General position')
     ]
 
     TASKS = [
@@ -46,20 +47,24 @@ class Command(BaseCommand):
     def handle(self, *args, **options):
         if Group.objects.all().count() == 0 and EPCompany.objects.all().count() == 0:
             group = Group.objects.create(name='easyphoto')
-            EPCompany.objects.create(group=group, company_name='easyphoto')
+            company = EPCompany.objects.create(group=group, company_name='easyphoto')
+            # for test only
+            account = EPAccount.objects.create(user=User.objects.get(pk=1), nick_name='Nicolas')
+            member = EPAccountCompany(account=account, company=company)
+            member.save()
         if EPPosition.objects.all().count() == 0:
             company = EPCompany.objects.get(pk=1)
             for name, description in Command.POSITIONS:
-                EPPosition.objects.create(company_id=company, name=name, description=description)
+                EPPosition.objects.create(company=company, name=name, description=description)
         if EPWorkflow.objects.all().count() == 0:
             company = EPCompany.objects.get(pk=1)
-            EPWorkflow.objects.create(workflow_name='epworkflow', company_id=company)
+            EPWorkflow.objects.create(workflow_name='epworkflow', company=company)
         if EPTask.objects.all().count() == 0:
             workflow = EPWorkflow.objects.get(pk=1)
             for name, description in Command.TASKS:
-                EPTask.objects.create(workflow_id=workflow, task_name=name, description=description)
+                EPTask.objects.create(workflow=workflow, task_name=name, description=description)
         if EPStatus.objects.all().count() == 0:
             workflow = EPWorkflow.objects.get(pk=1)
             for sequence, name, task in Command.STATUS:
-                task_id = EPTask.objects.get(task_name=task)
-                EPStatus.objects.create(sequence=sequence, name=name, workflow_id=workflow, task_id=task_id)
+                task = EPTask.objects.get(task_name=task)
+                EPStatus.objects.create(sequence=sequence, name=name, workflow=workflow, task=task)

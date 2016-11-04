@@ -1,7 +1,84 @@
+@import 'setting';
 @import '../../node_modules/bootstrap-sass/assets/stylesheets/bootstrap';
+@import "../../node_modules/font-awesome/scss/font-awesome";
 @import 'login';
 
 body {
   font-size: 16px;
   border: 1px solid green;
+}
+
+.page-main {
+  .title-link {
+    a {
+      display: inline-block;
+    }
+    &.navigate-left {
+      text-align: left;
+    }
+    &.navigate-right {
+      text-align: right;
+    }
+  }
+  .page-title {
+    text-align: center;
+  }
+}
+
+.list-item-wrapper {
+  .list-item {
+    border: 1px solid lightgrey;
+    border-radius: 10px;
+    margin: 10px;
+    &.add-item {
+      cursor: pointer;
+      color: $primary-color;
+      text-align: center;
+      .list-item-header {
+        margin-top: 11px;
+        border-bottom: none;
+      }
+      .list-item-footer {
+        border-top: none;
+      }
+    }
+    .list-item-header {
+      border-bottom: 1px solid lightgrey;
+      height: 30px;
+      .list-item-button {
+        float: right;
+        cursor: pointer;
+        background: 0 0;
+        border: 0;
+      }
+      .list-item-title {
+        text-align: center;
+        font-size: 16px;
+        font-weight: bold;
+      }
+    }
+    .list-item-body {
+      padding: 10px;
+      .form-horizontal .form-group {
+        > div {
+          padding-left: 10px;
+        }
+      }
+    }
+    .list-item-footer {
+      border-top: 1px solid lightgrey;
+      height: 40px;
+      padding-top: 7px;
+      .list-item-button {
+        text-align: center;
+        >button {
+          border: none;
+          background-color: transparent;
+          &.red-button {
+            color: red;
+          }
+        }
+      }
+    }
+  }
 }

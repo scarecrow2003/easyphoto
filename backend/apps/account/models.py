@@ -20,6 +20,7 @@ class EPCompany(models.Model):
     from django.contrib.auth.models import Group
     group = models.OneToOneField(Group, on_delete=models.CASCADE)
     company_name = models.CharField(max_length=50)
+    members = models.ManyToManyField(EPAccount, through='EPAccountCompany', related_name='companies')
 
     class Meta:
         app_label = 'account'
@@ -30,7 +31,7 @@ class EPCompany(models.Model):
 
 
 class EPPosition(BaseModel):
-    company_id = models.ForeignKey(EPCompany)
+    company = models.ForeignKey(EPCompany)
     name = models.CharField(max_length=30)
     description = models.CharField(max_length=100)
 
@@ -43,15 +44,16 @@ class EPPosition(BaseModel):
 
 
 class EPAccountCompany(BaseModel):
-    account_id = models.ForeignKey(EPAccount)
-    company_id = models.ForeignKey(EPCompany)
-    position_id = models.ForeignKey(EPPosition)
+    account = models.ForeignKey(EPAccount, on_delete=models.CASCADE)
+    company = models.ForeignKey(EPCompany, on_delete=models.CASCADE)
+    position = models.ForeignKey(EPPosition, blank=True, null=True)
     dividend = models.DecimalField(max_digits=4, decimal_places=2, default=2)
     max_discount = models.DecimalField(max_digits=4, decimal_places=2, default=20)
+    salary = models.DecimalField(max_digits=8, decimal_places=2, default=0)
 
     class Meta:
         app_label = 'account'
         db_table = 'ep_account_company'
 
     def __str__(self):
-        return self.account_id + self.company_id + self.position_id
+        return self.account + self.company + self.position

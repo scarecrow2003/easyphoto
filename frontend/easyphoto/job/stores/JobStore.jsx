@@ -5,6 +5,7 @@ class JobStore extends BaseStore {
         super();
         this.subscribe(() => this._registerToActions.bind(this));
         this._jobs = [];
+        this._companies = [];
     }
 
     get jobs() {
@@ -14,7 +15,8 @@ class JobStore extends BaseStore {
     _registerToActions(action) {
         switch (action.actionType) {
             case ACTION_LIST_JOBS:
-                this._jobs = action.data;
+                this._jobs = action.jobs;
+                this._companies = action.companies
                 this.emitChange();
                 break;
             default:

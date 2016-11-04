@@ -62,8 +62,8 @@ function AlertUtil() {
         });
     };
 
-    self.ajaxGet = function(url, payload, successCallback, errorCallback, requestFailedCallback, hideMessage, successMessge, errorMessage, failMessage) {
-        return self.ajax(url, "GET", payload, successCallback, errorCallback, requestFailedCallback, hideMessage, successMessge, errorMessage, failMessage);
+    self.ajaxGet = function(url, successCallback, errorCallback, requestFailedCallback, hideMessage, successMessge, errorMessage, failMessage) {
+        return self.ajax(url, "GET", null, successCallback, errorCallback, requestFailedCallback, hideMessage, successMessge, errorMessage, failMessage);
     };
 
     self.ajaxPost = function(url, payload, successCallback, errorCallback, requestFailedCallback, hideMessage, successMessge, errorMessage, failMessage) {

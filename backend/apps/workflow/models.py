@@ -7,7 +7,7 @@ class EPWorkflow(BaseModel):
     from ..account.models import EPCompany
     workflow_name = models.CharField(max_length=30)
     description = models.CharField(max_length=100, blank=True)
-    company_id = models.ForeignKey(EPCompany)
+    company = models.ForeignKey(EPCompany)
 
     class Meta:
         app_label = 'workflow'
@@ -17,7 +17,7 @@ class EPWorkflow(BaseModel):
 class EPTask(BaseModel):
     task_name = models.CharField(max_length=30)
     description = models.CharField(max_length=100, blank=True)
-    workflow_id = models.ForeignKey(EPWorkflow)
+    workflow = models.ForeignKey(EPWorkflow)
 
     class Meta:
         app_label = 'workflow'
@@ -25,10 +25,10 @@ class EPTask(BaseModel):
 
 
 class EPStatus(BaseModel):
-    workflow_id = models.ForeignKey(EPWorkflow)
+    workflow = models.ForeignKey(EPWorkflow)
     sequence = models.IntegerField()
     name = models.CharField(max_length=100)
-    task_id = models.ForeignKey(EPTask)
+    task = models.ForeignKey(EPTask)
 
     class Meta:
         app_label = 'workflow'
