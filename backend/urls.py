@@ -23,5 +23,6 @@ urlpatterns = [
     url(r'^admin0914/', include(admin.site.urls)),
     url(r'^onboarding/', include('apps.account.urls')),
     url(r'^private/rest/', include('apps.job.urls')),
+    url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework')),
     url(r'^', TemplateView.as_view(template_name='public/index.html'), name='home')
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
