@@ -18,7 +18,7 @@ const DIST_DIR = 'public/static';
 const SASS_DIR = 'sass';
 
 var customOpts = {
-    entries: ['./easyphoto/app.jsx'],
+    entries: ['./easyphoto/app.js'],
     extensions: ['.jsx'],
     debug: true,
     fullPaths: false,

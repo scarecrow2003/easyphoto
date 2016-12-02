@@ -7,6 +7,7 @@ As a company admin, I am able to generate a barcode for user to scan and join.
 As a company admin, I am able to set different role for users.
 As a company admin, I am able to generate different barcode for different user role.
 As a company admin, I am able to see a list of all users, their role and dividends.
+As a company admin, I am able to generate the monthly dividend for every employee.
 
 Registered User:
 As a registered user, I am able to scan a barcode to join a company.
@@ -19,3 +20,11 @@ As a photographer, make up artist or graphic designer, I am able to scan a job b
 As a photographer, make up artist or graphic designer, I am able to scan a job barcode to complete the job.
 As a photographer, make up artist or graphic designer, I am able to scan a job barcode to generate another barcode for front admin scan if the job is not assigned to me.
 As a front admin, I am able to scan a photographer, make up artist and graphic designer generated barcode to confirm job assignment change.
+
+
+
+************
+Statistics
+Company Admin:
+As a company admin, I am able to view a graph of average time each task takes.
+As a company admin, I am able to compare average time takes of our company with other company
